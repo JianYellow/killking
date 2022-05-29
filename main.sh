@@ -19,6 +19,17 @@ PACKAGE_INSTALL=("apt -y install" "apt -y install" "yum -y install" "yum -y inst
 CMD=("$(grep -i pretty_name /etc/os-release 2>/dev/null | cut -d \" -f2)" "$(hostnamectl 2>/dev/null | grep -i system | cut -d : -f2)" "$(lsb_release -sd 2>/dev/null)" "$(grep -i description /etc/lsb-release 2>/dev/null | cut -d \" -f2)" "$(grep . /etc/redhat-release 2>/dev/null)" "$(grep . /etc/issue 2>/dev/null | cut -d \\ -f1 | sed '/^[ ]*$/d')")
 
 
+# 判断系统，此部分代码感谢fscarmen的技术指导
+for i in "${CMD[@]}"; do
+	SYS="$i" && [[ -n $SYS ]] && break
+done
+
+for ((int = 0; int < ${#REGEX[@]}; int++)); do
+	[[ $(echo "$SYS" | tr '[:upper:]' '[:lower:]') =~ ${REGEX[int]} ]] && SYSTEM="${RELEASE[int]}" && [[ -n $SYSTEM ]] && break
+done
+
+[[ -z $SYSTEM ]] && red "不支持VPS的当前系统，请使用主流操作系统" && exit 1
+
 # 控制台字体
 green() {
 	echo -e "\033[32m\033[01m$1\033[0m"
