@@ -85,7 +85,7 @@ install() {
 }
 
 Service_config() {
-       cat << EOF > /etc/systemd/system/killking.service
+       cat << TEXT > /etc/systemd/system/killking.service
        [Unit]
        Description=Killking utility daemon
        After=network.target
@@ -98,7 +98,7 @@ Service_config() {
         WorkingDirectory=/var
         ExecStart=./webBenchmark_linux_x64 -c 64 -s http://dong-down.oss-cn-beijing.aliyuncs.com/sdapp/606/xiaoshuo.apk
         Restart=always
-        EOF
+        TEXT
         green "服务安装完成"
 }
 
