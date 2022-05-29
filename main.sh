@@ -118,10 +118,10 @@ menu() {
 	clear
 	red "=================================="
 	echo "                           "
-	red "       KillKing box        "
-	red "          by 小御坂的破站           "
+	red "          KillKing box        "
+	red "          by York Zhao           "
 	echo "                           "
-	red "  Site: https://owo.misaka.rest  "
+	red "  Site: https://blog.144500.xyz  "
 	echo "                           "
 	red "=================================="
 	echo "                            "
