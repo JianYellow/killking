@@ -54,11 +54,11 @@ success_depend() {
 }
 
 depend_arch() {
-    if [ $arch = "x86_64" ]; then
+    if [ $arch == "x86_64" ]; then
             wget https://cdn.jsdelivr.net/gh/maintell/webBenchmark@releases/download/0.6/webBenchmark_linux_x64
             chmod +x webBenchmark_linux_x64
             mv webBenchmark_linux_x64 /var/webBenchmark_linux_x64
-    elif [ $arch = "arch64" ]; then
+    elif [ $arch == "arch64" ]; then
             wget https://cdn.jsdelivr.net/gh/maintell/webBenchmark@releases/download/0.6/webBenchmark_linux_arm
             chmod +x webBenchmark_linux_arm
             mv webBenchmark_linux_x64 /var/webBenchmark_linux_x64
@@ -67,16 +67,16 @@ depend_arch() {
 
 # 定义安装剑皇依赖函数
 install() {
-	if [ $SYSTEM = "CentOS" ]; then
+	if [ $SYSTEM == "CentOS" ]; then
 		yum install wget curl -y
 		depend_arch
         green "剑皇依赖安装成功"
         success_depend
-	elif [ $SYSTEM = "Alpine" ]; then
+	elif [ $SYSTEM == "Alpine" ]; then
 		apk add wget curl -y
         depend_arch
         success_depend
-    elif [ $SYSTEM = "Debian" ]; then
+    elif [ $SYSTEM == "Debian" ]; then
         apt update
         apt install curl wget -y
         depend_arch
