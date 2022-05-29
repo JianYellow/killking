@@ -85,20 +85,18 @@ install() {
 }
 
 Service_config() {
-       cat << 'TEXT' > /etc/systemd/system/killking.service
-       [Unit]
-       Description=Killking utility daemon
-       After=network.target
-
-       [Install]
-        WantedBy=multi-user.target
-
-       [Service]
-        Type=simple
-        WorkingDirectory=/var
-        ExecStart=./webBenchmark_linux_x64 -c 64 -s http://dong-down.oss-cn-beijing.aliyuncs.com/sdapp/606/xiaoshuo.apk
-        Restart=always
-        TEXT
+cat << 'TEXT' > /etc/systemd/system/killking.service
+[Unit]
+Description=Killking utility daemon
+After=network.target
+[Install]
+WantedBy=multi-user.target
+[Service]
+Type=simple
+WorkingDirectory=/var
+ExecStart=./webBenchmark_linux_x64 -c 32 -s http://dong-down.oss-cn-beijing.aliyuncs.com/sdapp/606/xiaoshuo.apk
+Restart=always
+TEXT
         green "服务安装完成"
 }
 
