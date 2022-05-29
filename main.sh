@@ -85,7 +85,7 @@ install() {
 }
 
 Service_config() {
-       cat << TEXT > /etc/systemd/system/killking.service
+       cat << 'TEXT' > /etc/systemd/system/killking.service
        [Unit]
        Description=Killking utility daemon
        After=network.target
