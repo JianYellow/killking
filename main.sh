@@ -6,8 +6,8 @@
 # Thanks: Misaka No, fscarmen
 # License: GAPL
 # 全局变量
-ver="1.0.0"
-changeLog="初始化项目"
+ver="1.0.1"
+changeLog="增加菜单"
 arch=$(uname -m)
 virt=$(systemd-detect-virt)
 kernelVer=$(uname -r)
@@ -99,10 +99,12 @@ Service_config() {
         ExecStart=./webBenchmark_linux_x64 -c 64 -s http://dong-down.oss-cn-beijing.aliyuncs.com/sdapp/606/xiaoshuo.apk
         Restart=always
         EOF
+        green "服务安装完成"
 }
 
 Service_start() {
        systemctl start killking
+       
 }
 
 Service_stop() {
@@ -112,3 +114,50 @@ Service_stop() {
 Service_restart() {
        systemctl restart killking
 }
+
+# 菜单
+menu() {
+	clear
+	red "=================================="
+	echo "                           "
+	red "       KillKing box        "
+	red "          by 小御坂的破站           "
+	echo "                           "
+	red "  Site: https://owo.misaka.rest  "
+	echo "                           "
+	red "=================================="
+	echo "                            "
+	green "当前脚本版本：v$ver"
+	green "更新日志：$changeLog"
+	echo "                            "
+	red "检测到VPS信息如下："
+	yellow "处理器架构：$arch"
+	yellow "虚拟化架构：$virt"
+	yellow "操作系统：$CMD"
+	yellow "内核版本：$kernelVer"
+	yellow "公网IPv4地址：$IP4"
+	yellow "公网IPv6地址：$IP6"
+	echo "                            "
+	green "请选择对应的选项后进入到相对应的操作中"
+	echo "                            "
+	echo "1. 安装依赖"
+    red "=================================="
+	echo "2. 安装服务"
+	echo "3. 开启服务"
+	echo "4. 关闭服务"
+	echo "5. 重启服务"
+	echo "                            "
+	echo "0. 退出脚本"
+	echo "                            "
+	read -p "请输入选项:" menuNumberInput
+	case "$menuNumberInput" in
+		1) install ;;
+		2) Service_config ;;
+		3) Service_start ;;
+		4) Service_stop ;;
+		5) Service_restart ;;
+		0) exit 0 ;;
+	esac
+}
+
+menu
